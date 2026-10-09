@@ -1,0 +1,351 @@
+/* ============================================
+   ORDER DETAILS - 2026 (FINAL)
+   ============================================ */
+
+.order-box {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+/* ============================================
+   TABLE BLOCKS
+   ============================================ */
+.table-block {
+  margin-bottom: 32px;
+  border: 1px solid #e8e8ed;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.table-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1d1d1f;
+  background: #f5f5f7;
+  padding: 16px 24px;
+  margin: 0;
+  border-bottom: 1px solid #e8e8ed;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================
+   TABLE
+   ============================================ */
+.table-main {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: white;
+}
+
+.table-main thead {
+  background: #fafafa;
+}
+
+.table-main thead tr {
+  border-bottom: 1px solid #e8e8ed;
+}
+
+.head-cell {
+  padding: 14px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6e6e73;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* ============================================
+   COLUMN WIDTHS - ГОЛ ЗАСВАР
+   ============================================ */
+.table-main th:nth-child(1),
+.table-main td:nth-child(1) {
+  width: 100px;
+}
+
+.table-main th:nth-child(2),
+.table-main td:nth-child(2) {
+  width: auto;
+}
+
+.table-main th:nth-child(3),
+.table-main td:nth-child(3) {
+  width: 120px;
+  text-align: center;
+}
+
+.table-main th:nth-child(4),
+.table-main td:nth-child(4) {
+  width: 120px;
+  text-align: right;
+}
+
+/* ============================================
+   TABLE ROWS
+   ============================================ */
+.table-row {
+  border-bottom: 1px solid #f0f0f5;
+  transition: background 0.15s ease;
+}
+
+.table-row:hover {
+  background: #fafafa;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-cell {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #1d1d1f;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+/* ============================================
+   ITEM IMAGE - ГОЛ ЗАСВАР
+   ============================================ */
+.item-img {
+  width: 64px !important;
+  height: 64px !important;
+  max-width: 64px !important;
+  max-height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  border: 1px solid #f0f0f5;
+}
+
+/* ============================================
+   STATUS TAGS
+   ============================================ */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.status-tag.processing {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.status-tag.shipped {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.status-tag.delivered {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.status-tag.cancelled {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.pay-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pay-tag.paid {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.pay-tag.not-paid {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+/* ============================================
+   TOTAL ROW
+   ============================================ */
+.total-row {
+  background: #f5f5f7 !important;
+}
+
+.total-row .table-cell {
+  font-weight: 700;
+}
+
+.total-row strong {
+  font-size: 18px;
+  color: #ff6b35;
+  font-weight: 900;
+}
+
+/* ============================================
+   BACK BUTTON (TOP) - УЛБАР ШАР
+   ============================================ */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  color: #ff6b35;
+  border: 2px solid #ff6b35;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-bottom: 24px;
+}
+
+.back-button:hover {
+  background: #ff6b35;
+  color: white;
+  border-color: #ff6b35;
+  transform: translateX(-4px);
+  box-shadow: 0 8px 16px rgba(255, 107, 53, 0.3);
+}
+
+/* ============================================
+   ORDER ACTIONS (BOTTOM) - УЛБАР ШАР + НОГООН
+   ============================================ */
+.order-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e8e8ed;
+  flex-wrap: wrap;
+}
+
+/* "← Буцах" - УЛБАР ШАР */
+.btn-back-bottom {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+}
+
+.btn-back-bottom:hover {
+  background: linear-gradient(135deg, #e85a2a 0%, #ff6b35 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(255, 107, 53, 0.4);
+}
+
+/* "Худалдан авалт үргэлжлүүлэх" - НОГООН */
+.btn-shop-more {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+}
+
+.btn-shop-more:hover {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(34, 197, 94, 0.4);
+}
+
+.btn-back-bottom:active,
+.btn-shop-more:active {
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .order-box {
+    margin: 20px auto;
+    padding: 16px;
+    border-radius: 16px;
+  }
+  .table-title {
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+  .head-cell {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+  .table-cell {
+    padding: 12px;
+    font-size: 13px;
+  }
+  .item-img {
+    width: 48px !important;
+    height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+  }
+  .table-main th:nth-child(1),
+  .table-main td:nth-child(1) {
+    width: 70px;
+  }
+  .table-main th:nth-child(3),
+  .table-main td:nth-child(3),
+  .table-main th:nth-child(4),
+  .table-main td:nth-child(4) {
+    width: 70px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .order-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-back-bottom,
+  .btn-shop-more {
+    width: 100%;
+  }
+}

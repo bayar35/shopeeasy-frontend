@@ -1,0 +1,15 @@
+/* Wishlist remove animation */
+.product-card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.product-card.removing {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+/* Wishlist button hover */
+.wishlist-btn:hover {
+  transform: scale(1.1);
+}

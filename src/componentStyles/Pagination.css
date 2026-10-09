@@ -1,0 +1,64 @@
+/* =========================================================
+   PAGINATION DESIGN
+   ========================================================= */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 40px 0;
+  width: 100%;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 14px;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e2e5e9;
+  border-radius: 10px; /* Дугуй булантай болгоно */
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Хэрэглэгч товчлуур дээр хулганаа аваачих үед */
+.pagination-btn:hover {
+  border-color: #ff6b35;
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.03);
+}
+
+/* Одоо идэвхтэй байгаа (хэрэглэгчийн үзэж буй) хуудасны тоо */
+.pagination-btn.active {
+  background: #ff6b35; /* Улбар шар өнгөөр голлоно */
+  color: #ffffff !important;
+  border-color: #ff6b35;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+}
+
+/* Эхний, Сүүлийн, Өмнөх, Дараах гэсэн үгтэй товчлуурууд */
+.pagination-btn:first-of-type,
+.pagination-btn:last-of-type,
+.pagination-btn:contains("Next"),
+.pagination-btn:contains("Prev") {
+  background: #f5f5f7;
+  border-color: #e2e5e9;
+  font-size: 13px;
+  color: #555555;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f5f5f5;
+  border-color: #e5e5e5;
+  color: #aaa;
+}

@@ -1,0 +1,190 @@
+/* ============================================
+   PAYMENT PAGE - 2026
+   ============================================ */
+
+.payment-container {
+  min-height: 60vh;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ============================================
+   GO BACK BUTTON - УЛБАР ШАР
+   ============================================ */
+.payment-go-back {
+  align-self: flex-start;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px !important;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+}
+
+.payment-go-back:hover {
+  background: linear-gradient(135deg, #e85a2a 0%, #ff6b35 100%) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(255, 107, 53, 0.4);
+}
+
+.payment-go-back:active {
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   ORDER SUMMARY CARD
+   ============================================ */
+.payment-summary-card {
+  width: 100%;
+  background: white;
+  border: 1px solid #e8e8ed;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-summary-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 8px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8e8ed;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #6e6e73;
+  padding: 4px 0;
+}
+
+.summary-row span:last-child {
+  color: #1d1d1f;
+  font-weight: 600;
+}
+
+.summary-row.total {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #e8e8ed;
+  font-size: 16px;
+}
+
+.summary-row.total span:first-child {
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+.summary-row.total strong {
+  font-size: 24px;
+  font-weight: 900;
+  color: #ff6b35;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================
+   PAY BUTTON - НОГООН
+   ============================================ */
+.payment-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 18px 32px !important;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+}
+
+.payment-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(34, 197, 94, 0.4);
+}
+
+.payment-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.payment-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================
+   LOADING
+   ============================================ */
+.payment-container > p {
+  font-size: 16px;
+  color: #6e6e73;
+  text-align: center;
+  padding: 48px;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 640px) {
+  .payment-container {
+    padding: 24px 16px;
+    gap: 16px;
+  }
+
+  .payment-go-back {
+    padding: 12px 24px !important;
+    font-size: 13px !important;
+  }
+
+  .payment-summary-card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .payment-summary-card h3 {
+    font-size: 16px;
+  }
+
+  .summary-row {
+    font-size: 13px;
+  }
+
+  .summary-row.total strong {
+    font-size: 20px;
+  }
+
+  .payment-btn {
+    padding: 16px 24px !important;
+    font-size: 14px !important;
+  }
+}

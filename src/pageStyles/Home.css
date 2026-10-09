@@ -1,0 +1,630 @@
+/* =========================================================
+   HOME PAGE
+   ShopEasy
+   ========================================================= */
+
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #fafafa;
+  color: #1a1a1a;
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.home-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.home-section {
+  width: 100%;
+  padding: 64px 0;
+  box-sizing: border-box;
+}
+
+.categories-section {
+  background: #fafafa;
+}
+
+.trending-section {
+  background: #ffffff;
+}
+
+.promo-section {
+  background: #fafafa;
+}
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.home-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.home-heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.home-section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #ff6b35;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+.home-section-title {
+  margin: 0;
+
+  color: #171717;
+
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -1.2px;
+}
+
+.home-section-description {
+  margin: 2px 0 0;
+
+  color: #777;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   GHOST BUTTON
+   ========================================================= */
+
+.home-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 11px 18px;
+
+  color: #1a1a1a;
+  background: #ffffff;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.home-btn-ghost:hover {
+  border-color: #1a1a1a;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   CATEGORIES
+   ========================================================= */
+
+.home-categories-grid {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(210px, 1fr)
+  );
+
+  gap: 18px;
+}
+
+.home-category-card {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  padding: 22px 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.035);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.home-category-card:hover {
+  border-color: #d9d9d9;
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+.home-category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 54px;
+  height: 54px;
+
+  flex-shrink: 0;
+
+  background: #f7f7f7;
+
+  border-radius: 15px;
+
+  font-size: 30px;
+  line-height: 1;
+}
+
+.home-category-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin-left: 14px;
+}
+
+.home-category-info h3 {
+  overflow: hidden;
+
+  margin: 0;
+
+  color: #1a1a1a;
+
+  font-size: 15px;
+  font-weight: 750;
+
+  line-height: 1.25;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  text-transform: capitalize;
+}
+
+.home-category-info p {
+  margin: 0;
+
+  color: #888;
+
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.home-category-arrow {
+  margin-left: auto;
+
+  flex-shrink: 0;
+
+  color: #aaa;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.home-category-card:hover .home-category-arrow {
+  color: #ff6b35;
+
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   PRODUCTS GRID & INNER CARDS (FIXED DESIGN)
+   ========================================================= */
+
+.home-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.home-products-grid > * {
+  min-width: 0;
+}
+
+/* Нүүр хуудасны картуудыг нэг жигд, цэгцтэй болгох хэсэг */
+.home-products-grid .product-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-products-grid .product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.home-products-grid .product-image-card {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.home-products-grid .product-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.home-products-grid .product-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-products-grid .home-price {
+  font-size: 14px;
+  color: #ff6b35;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* =========================================================
+   EMPTY PRODUCTS
+   ========================================================= */
+
+.home-empty-products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 260px;
+
+  padding: 40px 20px;
+
+  color: #888;
+
+  background: #fafafa;
+
+  border: 1px dashed #ddd;
+  border-radius: 18px;
+
+  text-align: center;
+}
+
+.home-empty-products svg {
+  margin-bottom: 12px;
+
+  color: #bbb;
+}
+
+.home-empty-products h3 {
+  margin: 0 0 6px;
+
+  color: #333;
+
+  font-size: 18px;
+}
+
+.home-empty-products p {
+  margin: 0;
+
+  color: #888;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   PROMO BANNER
+   ========================================================= */
+
+.home-promo-banner {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 1fr 320px;
+
+  align-items: center;
+
+  min-height: 320px;
+
+  padding: 52px 56px;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #151515 0%,
+      #252525 55%,
+      #303030 100%
+    );
+
+  border-radius: 26px;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+.home-promo-glow {
+  position: absolute;
+
+  top: -180px;
+  right: -80px;
+
+  width: 500px;
+  height: 500px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 107, 53, 0.27) 0%,
+      rgba(255, 107, 53, 0.08) 38%,
+      transparent 70%
+    );
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.home-promo-content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 15px;
+
+  max-width: 650px;
+}
+
+.home-promo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 7px 13px;
+
+  color: #ff9a75;
+
+  background: rgba(255, 107, 53, 0.12);
+
+  border: 1px solid rgba(255, 107, 53, 0.35);
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.home-promo-content h2 {
+  margin: 0;
+
+  font-size: 40px;
+  font-weight: 800;
+
+  line-height: 1.08;
+  letter-spacing: -1.4px;
+}
+
+.home-promo-content h2 strong {
+  color: #ff7547;
+}
+
+.home-promo-content p {
+  max-width: 500px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.home-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: fit-content;
+
+  margin-top: 5px;
+
+  padding: 13px 23px;
+
+  color: #ffffff;
+  background: #ff6b35;
+
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 750;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.home-btn-primary:hover {
+  background: #ff5722;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(255, 107, 53, 0.35);
+}
+
+/* =========================================================
+   PROMO VISUAL
+   ========================================================= */
+
+.home-promo-visual {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-promo-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 190px;
+  height: 190px;
+
+  color: rgba(255, 107, 53, 0.65);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 107, 53, 0.12),
+      rgba(255, 107, 53, 0.02) 65%,
+      transparent 66%
+    );
+
+  border: 1px solid rgba(255, 107, 53, 0.2);
+
+  border-radius: 50%;
+}
+
+/* =========================================================
+   BOTTOM CTA
+   ========================================================= */
+
+.home-bottom-section {
+  width: 100%;
+
+  padding: 80px 0;
+
+  background: #ffffff;
+}
+
+.home-bottom-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 720px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.home-bottom-content h2 {
+  margin: 12px 0 14px;
+
+  color: #171717;
+
+  font-size: 42px;
+  font-weight: 800;
+
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+}
+
+.home-bottom-content h2 span {
+  color: #ff6b35;
+}
+
+.home-bottom-content p {
+  max-width: 560px;
+
+  margin: 0;
+
+  color: #777;
+
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.home-btn-dark {
+  margin-top: 24px;
+
+  background: #1a1a1a;
+}
+
+.home-btn-dark:hover {
+  background: #333;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================================
+   TABLET RESPONSIVE

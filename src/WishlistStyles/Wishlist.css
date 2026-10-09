@@ -1,0 +1,168 @@
+/* WISHLIST PAGE - 2026 */
+
+.wishlist-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  min-height: 60vh;
+}
+
+.wishlist-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.wishlist-header h1 {
+  font-size: 36px;
+  font-weight: 900;
+  color: #1d1d1f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.wishlist-header p {
+  font-size: 16px;
+  color: #6e6e73;
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.empty-wishlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px;
+  min-height: 60vh;
+}
+
+.empty-wishlist svg {
+  color: #ff6b35;
+  margin-bottom: 24px;
+}
+
+.empty-wishlist h2 {
+  font-size: 28px;
+  font-weight: 900;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+}
+
+.empty-wishlist p {
+  font-size: 16px;
+  color: #6e6e73;
+  margin-bottom: 32px;
+}
+
+.browse-products-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #1d1d1f;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+}
+
+.browse-products-btn:hover {
+  background: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 640px) {
+  .wishlist-container {
+    padding: 24px 16px;
+  }
+  .wishlist-header h1 {
+    font-size: 24px;
+  }
+  .wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* Empty state - сайжруулсан */
+.empty-wishlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+  text-align: center;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.empty-wishlist svg {
+  color: #ff6b35;
+  margin-bottom: 24px;
+  animation: pulseHeart 2s ease-in-out infinite;
+}
+
+.empty-wishlist h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.empty-wishlist p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 32px;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.browse-products-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #1a1a1a;
+  color: white;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.browse-products-btn:hover {
+  background: #ff6b35;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseHeart {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}

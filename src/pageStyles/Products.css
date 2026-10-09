@@ -1,0 +1,211 @@
+/* ===========================
+   PRODUCTS PAGE
+   =========================== */
+.products-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  max-width: 1400px;
+  margin: 32px auto;
+  padding: 0 24px;
+  align-items: flex-start;
+}
+
+/* ===========================
+   SIDEBAR (Filters)
+   =========================== */
+.filter-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 100px;
+}
+
+.filter-heading {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filter-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-section li {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+}
+
+.filter-section li:hover {
+  background: #f7f7f7;
+  color: #1a1a1a;
+}
+
+.filter-section li.active {
+  background: #1a1a1a;
+  color: white;
+  font-weight: 600;
+}
+
+/* ===========================
+   PRODUCTS SECTION
+   =========================== */
+.products-section {
+  width: 100%;
+}
+
+.products-product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+/* ===========================
+   PRODUCT CARD (falls back if Product.css missing)
+   =========================== */
+.products-product-container .product-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden; /* 🔥 Зургийг картын хүрээнээс дээш, хажуу тийш халихаас бүрэн сэргийлнэ */
+  border: 1px solid #e2e5e9;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.products-product-container .product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.products-product-container .product-image-card {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.products-product-container .product-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.products-product-container .product-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.products-product-container .home-price {
+  font-size: 14px;
+  color: #ff6b35;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 1024px) {
+  .products-layout {
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .filter-section {
+    position: static;
+    padding: 16px;
+  }
+
+  .filter-section ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-section li {
+    padding: 8px 12px;
+    font-size: 13px;
+    background: #f7f7f7;
+  }
+
+  .products-product-container {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .products-product-container .product-image-card {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-product-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .products-product-container .product-image-card {
+    height: 140px;
+  }
+
+  .products-product-container .product-details {
+    padding: 12px;
+  }
+
+  .products-product-container .product-title {
+    font-size: 14px;
+  }
+}
+
+.products-product-container .product-card img,
+.products-product-container .product-image-card {
+  width: 100%;
+  height: 200px; /* Бүх зургийг нэг ижил 200px өндөртэй болгоно */
+  object-fit: cover; /* Зургийг сунгаж гажуудуулахгүйгээр тааруулж зүснэ */
+  display: block;
+}
+
+/* Дэлгэрэнгүй мэдээлэл агуулах хэсэг */
+.products-product-container .product-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}

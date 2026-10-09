@@ -1,0 +1,156 @@
+/* ============================================
+   ADMIN DASHBOARD - 2026
+   ============================================ */
+
+.main-content {
+  padding: 0;
+  width: 100%;
+}
+
+/* ============================================
+   STATS GRID - 3 багана
+   ============================================ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-box {
+  background: #ffffff;
+  border: 1px solid #e8e8ed;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 120px;
+}
+
+.stat-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  border-color: #ff6b35;
+}
+
+.stat-box .icon {
+  font-size: 28px !important;
+  color: #ff6b35;
+  margin-bottom: 4px;
+}
+
+.stat-box h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #86868b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.stat-box p {
+  font-size: 28px;
+  font-weight: 900;
+  color: #1d1d1f;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* ============================================
+   SOCIAL STATS - 3 багана
+   ============================================ */
+.social-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.social-box {
+  background: #ffffff;
+  border: 1px solid #e8e8ed;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+  min-height: 180px;
+}
+
+.social-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.social-box svg {
+  font-size: 40px !important;
+  margin-bottom: 8px;
+}
+
+.social-box.instagram svg {
+  color: #e1306c;
+}
+
+.social-box.linkedin svg {
+  color: #0077b5;
+}
+
+.social-box.youtube svg {
+  color: #ff0000;
+}
+
+.social-box h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0;
+}
+
+.social-box p {
+  font-size: 13px;
+  color: #6e6e73;
+  margin: 0;
+}
+
+.social-box p:last-child {
+  font-size: 12px;
+  color: #86868b;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+  .stats-grid,
+  .social-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid,
+  .social-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .stat-box {
+    padding: 16px;
+    min-height: 100px;
+  }
+  .stat-box p {
+    font-size: 22px;
+  }
+  .social-box {
+    padding: 20px;
+    min-height: 140px;
+  }
+}

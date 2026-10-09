@@ -1,0 +1,234 @@
+/* ============================================
+   SHIPPING FORM - 2026 FINAL
+   ============================================ */
+
+.shipping-form-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 40px 24px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e8e8ed;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.shipping-form-header {
+  font-size: 32px;
+  font-weight: 900;
+  color: #1d1d1f;
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.shipping-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.shipping-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ============================================
+   FORM GROUP
+   ============================================ */
+.shipping-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shipping-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d1d1f;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.required-mark {
+  color: #ef4444;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.required-hint {
+  font-size: 11px;
+  color: #ef4444;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.optional-hint {
+  font-size: 11px;
+  color: #86868b;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.shipping-form-group input,
+.shipping-form-group select {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1d1d1f;
+  background: #f5f5f7;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.shipping-form-group input::placeholder {
+  color: #86868b;
+}
+
+.shipping-form-group input:focus,
+.shipping-form-group select:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #1d1d1f;
+  box-shadow: 0 0 0 4px rgba(29, 29, 31, 0.06);
+}
+
+.shipping-form-group input:valid:not(:placeholder-shown) {
+  border-color: #22c55e;
+}
+
+.input-hint {
+  font-size: 12px;
+  color: #86868b;
+  text-align: right;
+  font-weight: 500;
+}
+
+/* ============================================
+   SHIPPING BUTTONS CONTAINER
+   ============================================ */
+.shipping-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Back button - улбар шар */
+.back-btn-shipping {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 32px !important;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25) !important;
+}
+
+.back-btn-shipping:hover {
+  background: linear-gradient(135deg, #e85a2a 0%, #ff6b35 100%) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(255, 107, 53, 0.4) !important;
+}
+
+.back-btn-shipping:active {
+  transform: translateY(-1px);
+}
+
+/* Continue button - ногоон */
+.shipping-submit-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex: 1;
+  padding: 18px 32px !important;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25) !important;
+}
+
+.shipping-submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(34, 197, 94, 0.4) !important;
+}
+
+.shipping-submit-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.shipping-submit-btn:disabled {
+  background: #d2d2d7 !important;
+  color: #86868b !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  opacity: 0.6;
+}
+
+.form-warning {
+  text-align: center;
+  font-size: 13px;
+  color: #f59e0b;
+  font-weight: 600;
+  padding: 8px;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 12px;
+  margin-top: -8px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 640px) {
+  .shipping-form-container {
+    margin: 20px 16px;
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+
+  .shipping-form-header {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .shipping-form-group input,
+  .shipping-form-group select {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .shipping-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .back-btn-shipping,
+  .shipping-submit-btn {
+    width: 100%;
+    padding: 16px 24px !important;
+    font-size: 14px !important;
+  }
+}
