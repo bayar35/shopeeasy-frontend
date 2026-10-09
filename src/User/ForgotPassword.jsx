@@ -22,7 +22,7 @@ function ForgotPassword() {
 
   const forgotPasswordEmail = (e) => {
     e.preventDefault();
-    dispatch(forgotPassword({ email }));
+    dispatch(forgotPassword(email));
   };
 
   useEffect(() => {
