@@ -20,6 +20,7 @@ function ReviewsList() {
     (state) => state.admin
   );
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [loadingReviews, setLoadingReviews] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,9 +28,11 @@ function ReviewsList() {
     dispatch(fetchAdminProducts());
   }, [dispatch]);
 
-  const handleViewReviews = (productId) => {
+  const handleViewReviews = async (productId) => {
     setSelectedProduct(productId);
-    dispatch(fetchProductReviews(productId));
+    setLoadingReviews(true);
+    await dispatch(fetchProductReviews(productId));
+    setLoadingReviews(false);
   };
 
   const handleDeleteReview = (productId, reviewId) => {
@@ -60,63 +63,68 @@ function ReviewsList() {
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-                    <PageTitle title="All Reviews" />
-          <div className="reviews-list-container">
-            <h1 className="reviews-list-title">All Products</h1>
-            {!products || products.length === 0 ? (
-              <p style={{ textAlign: "center", padding: "30px" }}>
-                No Products Found
-              </p>
-            ) : (
-              <table className="reviews-table">
-                <thead>
-                  <tr>
-                    <th>Sl No</th>
-                    <th>Product Name</th>
-                    <th>Product Image</th>
-                    <th>Number of Reviews</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products.map((product, index) => (
-                    <tr key={product._id}>
-                      <td>{index + 1}</td>
-                      <td>{product.name}</td>
-                      <td>
-                        <img
-                          src={
-                            product.images && product.images.length > 0
-                              ? product.images[0].url
-                              : "https://via.placeholder.com/50"
-                          }
-                          alt={product.name}
-                          className="product-image"
-                        />
-                      </td>
-                      <td>{product.numOfReviews || 0}</td>
-                      <td>
-                        {product.numOfReviews > 0 && (
-                          <button
-                            className="action-btn view-btn"
-                            onClick={() => handleViewReviews(product._id)}
-                          >
-                            View Reviews
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+      <PageTitle title="All Reviews" />
+      <div className="reviews-list-container">
+        <h1 className="reviews-list-title">All Products</h1>
+        
+        {/* Зөвхөн эхний ачаалалтад Loader */}
+        {loading && !products ? (
+          <Loader />
+        ) : !products || products.length === 0 ? (
+          <p style={{ textAlign: "center", padding: "30px" }}>
+            No Products Found
+          </p>
+        ) : (
+          <table className="reviews-table">
+            <thead>
+              <tr>
+                <th>Sl No</th>
+                <th>Product Name</th>
+                <th>Product Image</th>
+                <th>Number of Reviews</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product, index) => (
+                <tr key={product._id}>
+                  <td>{index + 1}</td>
+                  <td>{product.name}</td>
+                  <td>
+                    <img
+                      src={
+                        product.images && product.images.length > 0
+                          ? product.images[0].url
+                          : "https://via.placeholder.com/50"
+                      }
+                      alt={product.name}
+                      className="product-image"
+                    />
+                  </td>
+                  <td>{product.numOfReviews || 0}</td>
+                  <td>
+                    {product.numOfReviews > 0 && (
+                      <button
+                        className="action-btn view-btn"
+                        onClick={() => handleViewReviews(product._id)}
+                      >
+                        View Reviews
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
 
-            {selectedProduct && reviews && reviews.length > 0 && (
-              <div className="reviews-details">
+        {/* Review-үүд */}
+        {selectedProduct && (
+          <div className="reviews-details">
+            {loadingReviews ? (
+              <Loader />
+            ) : reviews && reviews.length > 0 ? (
+              <>
                 <h2>Reviews for Product</h2>
                 <table className="reviews-table">
                   <thead>
@@ -149,11 +157,15 @@ function ReviewsList() {
                     ))}
                   </tbody>
                 </table>
-              </div>
+              </>
+            ) : (
+              <p style={{ textAlign: "center", padding: "20px" }}>
+                No reviews found for this product
+              </p>
             )}
           </div>
-                  </>
-      )}
+        )}
+      </div>
     </>
   );
 }
