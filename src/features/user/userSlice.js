@@ -15,7 +15,7 @@ export const register = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || "Registration failed. Please try again later."
+        error.response?.data || { message: "Registration failed. Please try again later." }
       );
     }
   }
@@ -39,7 +39,7 @@ export const login = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || "Login failed. Please try again later."
+        error.response?.data || { message: "Login failed. Please try again later." }
       );
     }
   }
@@ -62,7 +62,7 @@ export const googleLogin = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Google login failed.");
+      return rejectWithValue(error.response?.data || { message: "Google login failed." });
     }
   }
 );
@@ -78,7 +78,7 @@ export const loadUser = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || "Failed to load user profile."
+        error.response?.data || { message: "Failed to load user profile." }
       );
     }
   }
@@ -94,7 +94,7 @@ export const logout = createAsyncThunk(
       const { data } = await axios.post("/api/v1/logout");
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Logout failed.");
+      return rejectWithValue(error.response?.data || { message: "Logout failed." });
     }
   }
 );
@@ -142,7 +142,7 @@ export const updatePassword = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Password update failed.");
+      return rejectWithValue(error.response?.data || { message: "Password update failed." });
     }
   }
 );
@@ -159,7 +159,7 @@ export const forgotPassword = createAsyncThunk(
       };
       const { data } = await axios.post(
         "/api/v1/password/forgot",
-        email,
+        { email },
         config
       );
       return data;
@@ -205,6 +205,7 @@ const initialState = {
   loading: false,
   error: null,
   success: false,
+  // isAuthenticated-ийг boolean утгаар шууд хадгална
   isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
   message: null,
 };
@@ -226,6 +227,8 @@ const userSlice = createSlice({
     clearUser: (state) => {
       state.user = null;
       state.isAuthenticated = false;
+      state.success = false;
+      state.message = null;
       localStorage.removeItem("user");
       localStorage.removeItem("isAuthenticated");
     },
@@ -240,20 +243,16 @@ const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.success = action.payload.success;
+        state.success = action.payload?.success || false;
         state.user = action.payload?.user || null;
         state.isAuthenticated = Boolean(action.payload?.user);
         localStorage.setItem("user", JSON.stringify(state.user));
-        localStorage.setItem(
-          "isAuthenticated",
-          JSON.stringify(state.isAuthenticated)
-        );
+        localStorage.setItem("isAuthenticated", state.isAuthenticated);
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error =
-          action.payload?.message ||
-          "Registration failed. Please try again later.";
+          action.payload?.message || "Registration failed. Please try again later.";
         state.user = null;
         state.isAuthenticated = false;
       });
@@ -267,14 +266,11 @@ const userSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.success = action.payload.success;
+        state.success = action.payload?.success || false;
         state.user = action.payload?.user || null;
         state.isAuthenticated = Boolean(action.payload?.user);
         localStorage.setItem("user", JSON.stringify(state.user));
-        localStorage.setItem(
-          "isAuthenticated",
-          JSON.stringify(state.isAuthenticated)
-        );
+        localStorage.setItem("isAuthenticated", state.isAuthenticated);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
@@ -293,14 +289,11 @@ const userSlice = createSlice({
       .addCase(googleLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.success = action.payload.success;
+        state.success = action.payload?.success || false;
         state.user = action.payload?.user || null;
         state.isAuthenticated = Boolean(action.payload?.user);
         localStorage.setItem("user", JSON.stringify(state.user));
-        localStorage.setItem(
-          "isAuthenticated",
-          JSON.stringify(state.isAuthenticated)
-        );
+        localStorage.setItem("isAuthenticated", state.isAuthenticated);
       })
       .addCase(googleLogin.rejected, (state, action) => {
         state.loading = false;
@@ -321,10 +314,7 @@ const userSlice = createSlice({
         state.user = action.payload?.user || null;
         state.isAuthenticated = Boolean(action.payload?.user);
         localStorage.setItem("user", JSON.stringify(state.user));
-        localStorage.setItem(
-          "isAuthenticated",
-          JSON.stringify(state.isAuthenticated)
-        );
+        localStorage.setItem("isAuthenticated", state.isAuthenticated);
       })
       .addCase(loadUser.rejected, (state, action) => {
         state.loading = false;
@@ -346,7 +336,12 @@ const userSlice = createSlice({
         state.error = null;
         state.user = null;
         state.isAuthenticated = false;
-        state.success = action.payload?.success || false;
+        
+        // АНХААР: Энд success-ийг false болгож байна. 
+        // Ингэснээр "Амжилттай нэвтэрлээ" гэж гарахгүй.
+        state.success = false; 
+        state.message = action.payload?.message || "Амжилттай гарлаа";
+        
         localStorage.removeItem("user");
         localStorage.removeItem("isAuthenticated");
       })
@@ -367,7 +362,6 @@ const userSlice = createSlice({
         state.success = action.payload?.success || false;
         state.message = action.payload?.message || "Profile updated";
 
-        // ⭐ ШИНЭ: user объектыг бүрэн солих (reference)
         if (action.payload?.user) {
           state.user = { ...action.payload.user };
         }
@@ -428,6 +422,8 @@ const userSlice = createSlice({
           action.payload?.message || "Password reset successfully";
         state.user = null;
         state.isAuthenticated = false;
+        localStorage.removeItem("user");
+        localStorage.removeItem("isAuthenticated");
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.loading = false;
