@@ -5,8 +5,9 @@ import axios from "axios";
 // 🔥 PRODUCTION COMPATIBILITY SETUP (Vercel-д зориулсан тусгай тохиргоо)
 // =========================================================================
 // Vercel дээр proxy ажилладаггүй тул бодит Render бэкэнд хаягийг энд шууд зааж өгнө.
-axios.defaults.baseURL = "https://onrender.com";
-axios.defaults.withCredentials = true; // Күүки болон JWT-ийг интернетээр алдаагүй дамжуулахад заавал хэрэгтэй
+axios.defaults.baseURL = "https://shopeeasy-backend.onrender.com/";
+axios.defaults.withCredentials = true;
+
 
 // Get All Products
 export const getProduct = createAsyncThunk(
