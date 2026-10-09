@@ -13,7 +13,6 @@ import {
 } from "../features/admin/adminSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
-import { useNavigate } from "react-router-dom";
 
 function ReviewsList() {
   const { products, loading, error, reviews, success, message } = useSelector(
@@ -22,7 +21,6 @@ function ReviewsList() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loadingReviews, setLoadingReviews] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchAdminProducts());
@@ -66,7 +64,7 @@ function ReviewsList() {
       <PageTitle title="All Reviews" />
       <div className="reviews-list-container">
         <h1 className="reviews-list-title">All Products</h1>
-        
+
         {/* Зөвхөн эхний ачаалалтад Loader */}
         {loading && !products ? (
           <Loader />
