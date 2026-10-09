@@ -27,9 +27,17 @@ function ReviewsList() {
   }, [dispatch]);
 
   const handleViewReviews = async (productId) => {
+    console.log("=== VIEW REVIEWS ===");
+    console.log("Product ID:", productId);
+    
     setSelectedProduct(productId);
     setLoadingReviews(true);
-    await dispatch(fetchProductReviews(productId));
+    
+    const result = await dispatch(fetchProductReviews(productId));
+    
+    console.log("API Result:", result);
+    console.log("Reviews from API:", result.payload?.reviews);
+    
     setLoadingReviews(false);
   };
 
@@ -59,13 +67,19 @@ function ReviewsList() {
     }
   }, [dispatch, error, success, message]);
 
+  // Debug: reviews state-ийг хэвлэх
+  console.log("=== RENDER ===");
+  console.log("selectedProduct:", selectedProduct);
+  console.log("loadingReviews:", loadingReviews);
+  console.log("reviews:", reviews);
+  console.log("reviews.length:", reviews?.length);
+
   return (
     <>
       <PageTitle title="All Reviews" />
       <div className="reviews-list-container">
         <h1 className="reviews-list-title">All Products</h1>
 
-        {/* Зөвхөн эхний ачаалалтад Loader */}
         {loading && !products ? (
           <Loader />
         ) : !products || products.length === 0 ? (
@@ -116,50 +130,54 @@ function ReviewsList() {
           </table>
         )}
 
-        {/* Review-үүд */}
         {selectedProduct && (
           <div className="reviews-details">
             {loadingReviews ? (
               <Loader />
-            ) : reviews && reviews.length > 0 ? (
+            ) : (
               <>
                 <h2>Reviews for Product</h2>
-                <table className="reviews-table">
-                  <thead>
-                    <tr>
-                      <th>Sl No</th>
-                      <th>Reviewer Name</th>
-                      <th>Rating</th>
-                      <th>Comment</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {reviews.map((review, index) => (
-                      <tr key={review._id}>
-                        <td>{index + 1}</td>
-                        <td>{review.name}</td>
-                        <td>{review.rating}</td>
-                        <td>{review.comment}</td>
-                        <td>
-                          <button
-                            className="action-btn delete-btn"
-                            onClick={() =>
-                              handleDeleteReview(selectedProduct, review._id)
-                            }
-                          >
-                            <Delete />
-                          </button>
-                        </td>
+                {reviews && reviews.length > 0 ? (
+                  <table className="reviews-table">
+                    <thead>
+                      <tr>
+                        <th>Sl No</th>
+                        <th>Reviewer Name</th>
+                        <th>Rating</th>
+                        <th>Comment</th>
+                        <th>Action</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {reviews.map((review, index) => (
+                        <tr key={review._id}>
+                          <td>{index + 1}</td>
+                          <td>{review.name || "Unknown"}</td>
+                          <td>{review.rating}</td>
+                          <td>{review.comment}</td>
+                          <td>
+                            <button
+                              className="action-btn delete-btn"
+                              onClick={() =>
+                                handleDeleteReview(
+                                  selectedProduct,
+                                  review._id
+                                )
+                              }
+                            >
+                              <Delete />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <p style={{ textAlign: "center", padding: "20px" }}>
+                    No reviews found for this product
+                  </p>
+                )}
               </>
-            ) : (
-              <p style={{ textAlign: "center", padding: "20px" }}>
-                No reviews found for this product
-              </p>
             )}
           </div>
         )}
