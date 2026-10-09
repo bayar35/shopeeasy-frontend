@@ -20,6 +20,7 @@
     "axios": "^1.20.0",
     "clsx": "^2.1.1",
     "country-state-city": "^3.2.1",
+    "dompurify": "^3.4.16",
     "framer-motion": "^14.0.0",
     "lucide-react": "^1.52.0",
     "razorpay": "^2.9.6",
