@@ -1,6 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// =========================================================================
+// 🔥 PRODUCTION COMPATIBILITY SETUP (Vercel-д зориулсан тусгай тохиргоо)
+// =========================================================================
+// Vercel дээр proxy ажилладаггүй тул бодит Render бэкэнд хаягийг энд шууд зааж өгнө.
+axios.defaults.baseURL = "https://onrender.com";
+axios.defaults.withCredentials = true; // Күүки болон JWT-ийг интернетээр алдаагүй дамжуулахад заавал хэрэгтэй
+
 // Get All Products
 export const getProduct = createAsyncThunk(
   "product/getProduct",
@@ -17,7 +24,7 @@ export const getProduct = createAsyncThunk(
       const { data } = await axios.get(link);
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "An error occured");
+      return rejectWithValue(error.response?.data || "An error occurred");
     }
   }
 );
@@ -31,7 +38,7 @@ export const getProductDetails = createAsyncThunk(
       const { data } = await axios.get(link);
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "An error occured");
+      return rejectWithValue(error.response?.data || "An error occurred");
     }
   }
 );
@@ -53,7 +60,7 @@ export const createReview = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "An error occured");
+      return rejectWithValue(error.response?.data || "An error occurred");
     }
   }
 );
