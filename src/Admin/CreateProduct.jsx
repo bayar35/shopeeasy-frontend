@@ -36,38 +36,55 @@ function CreateProduct() {
   ];
 
   const createProductSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!name || !price || !description || !category || !stock) {
-      toast.error("Please fill all the fields", {
-        position: "top-center",
-        autoClose: 3000,
-      });
-      return;
-    }
-
-    if (!image || image.length === 0) {
-      toast.error("Please select at least one image", {
-        position: "top-center",
-        autoClose: 3000,
-      });
-      return;
-    }
-
-    const myForm = new FormData();
-    myForm.set("name", name);
-    myForm.set("price", price);
-    myForm.set("description", description);
-    myForm.set("category", category);
-    myForm.set("stock", stock);
-
-    // ⭐ "images" (PLURAL) — backend-тай тохирох
-    image.forEach((img) => {
-      myForm.append("images", img);
+  if (!name || !price || !description || !category || !stock) {
+    toast.error("Please fill all the fields", {
+      position: "top-center",
+      autoClose: 3000,
     });
+    return;
+  }
 
-    dispatch(createProduct(myForm));
-  };
+  if (!image || image.length === 0) {
+    toast.error("Please select at least one image", {
+      position: "top-center",
+      autoClose: 3000,
+    });
+    return;
+  }
+
+  const myForm = new FormData();
+  myForm.set("name", name);
+  myForm.set("price", price);
+  myForm.set("description", description);
+  myForm.set("category", category);
+  myForm.set("stock", stock);
+
+  // ⭐ Base64-ийг Blob/File болгож хөрвүүлэх
+  image.forEach((base64Img, index) => {
+    // "data:image/jpeg;base64,/9j/4AAQ..." -> "/9j/4AAQ..."
+    const byteString = atob(base64Img.split(",")[1]);
+    const mimeString = base64Img.split(",")[0].split(":")[1].split(";")[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], { type: mimeString });
+    const file = new File([blob], `product_${index}.jpg`, { type: mimeString });
+
+    myForm.append("images", file);
+  });
+
+  // Debug: FormData-г шалгах
+  console.log("=== FORMDATA DEBUG ===");
+  for (let pair of myForm.entries()) {
+    console.log(pair[0], pair[1]);
+  }
+
+  dispatch(createProduct(myForm));
+};
 
   const createProductImage = (e) => {
   const files = Array.from(e.target.files);
