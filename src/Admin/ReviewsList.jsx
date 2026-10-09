@@ -27,17 +27,9 @@ function ReviewsList() {
   }, [dispatch]);
 
   const handleViewReviews = async (productId) => {
-    console.log("=== VIEW REVIEWS ===");
-    console.log("Product ID:", productId);
-    
     setSelectedProduct(productId);
     setLoadingReviews(true);
-    
-    const result = await dispatch(fetchProductReviews(productId));
-    
-    console.log("API Result:", result);
-    console.log("Reviews from API:", result.payload?.reviews);
-    
+    await dispatch(fetchProductReviews(productId));
     setLoadingReviews(false);
   };
 
@@ -66,13 +58,6 @@ function ReviewsList() {
       dispatch(clearMessage());
     }
   }, [dispatch, error, success, message]);
-
-  // Debug: reviews state-ийг хэвлэх
-  console.log("=== RENDER ===");
-  console.log("selectedProduct:", selectedProduct);
-  console.log("loadingReviews:", loadingReviews);
-  console.log("reviews:", reviews);
-  console.log("reviews.length:", reviews?.length);
 
   return (
     <>
