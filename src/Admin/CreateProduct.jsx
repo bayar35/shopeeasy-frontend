@@ -36,130 +36,132 @@ function CreateProduct() {
   ];
 
   const createProductSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!name || !price || !description || !category || !stock) {
-    toast.error("Please fill all the fields", {
-      position: "top-center",
-      autoClose: 3000,
-    });
-    return;
-  }
+    console.log("=== SUBMIT DEBUG ===");
+    console.log("image state:", image);
+    console.log("image.length:", image.length);
 
-  if (!image || image.length === 0) {
-    toast.error("Please select at least one image", {
-      position: "top-center",
-      autoClose: 3000,
-    });
-    return;
-  }
-
-  const myForm = new FormData();
-  myForm.set("name", name);
-  myForm.set("price", price);
-  myForm.set("description", description);
-  myForm.set("category", category);
-  myForm.set("stock", stock);
-
-  // ⭐ Base64-ийг Blob/File болгож хөрвүүлэх
-  image.forEach((base64Img, index) => {
-    // "data:image/jpeg;base64,/9j/4AAQ..." -> "/9j/4AAQ..."
-    const byteString = atob(base64Img.split(",")[1]);
-    const mimeString = base64Img.split(",")[0].split(":")[1].split(";")[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
+    if (!name || !price || !description || !category || !stock) {
+      toast.error("Please fill all the fields", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+      return;
     }
-    const blob = new Blob([ab], { type: mimeString });
-    const file = new File([blob], `product_${index}.jpg`, { type: mimeString });
 
-    myForm.append("images", file);
-  });
+    if (!image || image.length === 0) {
+      console.log("❌ Validation FAILED: image is empty");
+      toast.error("Please upload product images", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+      return;
+    }
 
-  // Debug: FormData-г шалгах
-  console.log("=== FORMDATA DEBUG ===");
-  for (let pair of myForm.entries()) {
-    console.log(pair[0], pair[1]);
-  }
+    console.log("✅ Validation PASSED");
 
-  dispatch(createProduct(myForm));
-};
+    const myForm = new FormData();
+    myForm.set("name", name);
+    myForm.set("price", price);
+    myForm.set("description", description);
+    myForm.set("category", category);
+    myForm.set("stock", stock);
+
+    // Base64 -> File хөрвүүлэх
+    image.forEach((base64Img, index) => {
+      const byteString = atob(base64Img.split(",")[1]);
+      const mimeString = base64Img.split(",")[0].split(":")[1].split(";")[0];
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([ab], { type: mimeString });
+      const file = new File([blob], `product_${index}.jpg`, {
+        type: mimeString,
+      });
+
+      myForm.append("images", file);
+    });
+
+    console.log("=== FORMDATA DEBUG ===");
+    for (let pair of myForm.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+
+    dispatch(createProduct(myForm));
+  };
 
   const createProductImage = (e) => {
-  const files = Array.from(e.target.files);
+    const files = Array.from(e.target.files);
 
-  setImage([]);
-  setImagePreview([]);
+    setImage([]);
+    setImagePreview([]);
 
-  files.forEach((file) => {
-    if (!file.type.startsWith("image/")) {
-      toast.error("Зөвхөн зураг файл сонгоно уу", {
-        position: "top-center",
-        autoClose: 3000,
-      });
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error("Зургийн хэмжээ 5MB-с бага байх ёстой", {
-        position: "top-center",
-        autoClose: 3000,
-      });
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        // ⭐ ЗУРГИЙГ COMPRESS ХИЙХ (800px, JPEG 0.7)
-        const img = new Image();
-        img.src = reader.result;
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          const MAX_SIZE = 800;
-          let width = img.width;
-          let height = img.height;
-
-          if (width > height) {
-            if (width > MAX_SIZE) {
-              height *= MAX_SIZE / width;
-              width = MAX_SIZE;
-            }
-          } else {
-            if (height > MAX_SIZE) {
-              width *= MAX_SIZE / height;
-              height = MAX_SIZE;
-            }
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0, width, height);
-
-          const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
-
-          console.log("=== IMAGE COMPRESSION ===");
-          console.log("Original:", reader.result.length);
-          console.log("Compressed:", compressedBase64.length);
-          console.log(
-            "Reduction:",
-            (
-              (1 - compressedBase64.length / reader.result.length) *
-              100
-            ).toFixed(1) + "%"
-          );
-
-          setImagePreview((old) => [...old, compressedBase64]);
-          setImage((old) => [...old, compressedBase64]);
-        };
+    files.forEach((file) => {
+      if (!file.type.startsWith("image/")) {
+        toast.error("Зөвхөн зураг файл сонгоно уу", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+        return;
       }
-    };
-    reader.readAsDataURL(file);
-  });
-};
+
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("Зургийн хэмжээ 5MB-с бага байх ёстой", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          const img = new Image();
+          img.src = reader.result;
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const MAX_SIZE = 800;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > MAX_SIZE) {
+                height *= MAX_SIZE / width;
+                width = MAX_SIZE;
+              }
+            } else {
+              if (height > MAX_SIZE) {
+                width *= MAX_SIZE / height;
+                height = MAX_SIZE;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
+
+            console.log("=== IMAGE COMPRESSION ===");
+            console.log("Original:", reader.result.length);
+            console.log("Compressed:", compressedBase64.length);
+
+            setImagePreview((old) => [...old, compressedBase64]);
+            setImage((old) => {
+              console.log("New image array length:", old.length + 1);
+              return [...old, compressedBase64];
+            });
+          };
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
   useEffect(() => {
     if (error) {
