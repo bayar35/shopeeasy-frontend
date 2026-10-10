@@ -1,23 +1,20 @@
-import React from 'react'
-import { useSelector} from 'react-redux';
-import Loader from '../components/Loader';
-import {Navigate} from 'react-router-dom';
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function ProtectedRoute({ element, adminOnly=false }) {
-    const { isAuthenticated, loading, user } = useSelector(state=>state.user);
-    if(loading) {
-        return <Loader />
-    }
+function ProtectedRoute({ element, adminOnly = false }) {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
-    if(!isAuthenticated) {
-        return <Navigate to="/login" />
-    }
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
 
-    if(adminOnly && user.role!=='admin') {
-        return <Navigate to="/" />
-    }
+  if (adminOnly && user?.role !== "admin") {
+    return <Navigate to="/" replace />;
+  }
 
-    return element
+  // ⭐ Хэрэв `element` байвал түүнийг, байхгүй бол `<Outlet />`
+  return element ? element : <Outlet />;
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;

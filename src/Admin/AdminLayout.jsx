@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, Outlet } from "react-router-dom";
 import {
   Dashboard as DashboardIcon,
   AddBox,
@@ -13,12 +13,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../AdminStyles/AdminLayout.css";
 
-function AdminLayout({ children }) {
+function AdminLayout() {
   const location = useLocation();
 
   const menuItems = [
     { path: "/admin/dashboard", label: "Dashboard", icon: DashboardIcon },
-    { path: "/admin/analytics", label: "Analytics", icon: BarChart },  // ⭐ НЭМЭХ
+    { path: "/admin/analytics", label: "Analytics", icon: BarChart },
     { path: "/admin/products", label: "All Products", icon: Inventory },
     { path: "/admin/product/create", label: "Create Product", icon: AddBox },
     { path: "/admin/users", label: "All Users", icon: People },
@@ -62,7 +62,9 @@ function AdminLayout({ children }) {
           </nav>
         </aside>
 
-        <main className="admin-content">{children}</main>
+        <main className="admin-content">
+          <Outlet />
+        </main>
       </div>
       <Footer />
     </>
