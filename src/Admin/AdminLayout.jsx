@@ -7,17 +7,18 @@ import {
   Inventory,
   People,
   ShoppingCart,
+  BarChart,
 } from "@mui/icons-material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../AdminStyles/AdminLayout.css";
-import { BarChart3 } from "lucide-react";
 
 function AdminLayout({ children }) {
   const location = useLocation();
 
   const menuItems = [
     { path: "/admin/dashboard", label: "Dashboard", icon: DashboardIcon },
+    { path: "/admin/analytics", label: "Analytics", icon: BarChart },  // ⭐ НЭМЭХ
     { path: "/admin/products", label: "All Products", icon: Inventory },
     { path: "/admin/product/create", label: "Create Product", icon: AddBox },
     { path: "/admin/users", label: "All Users", icon: People },
@@ -41,11 +42,6 @@ function AdminLayout({ children }) {
             <DashboardIcon className="admin-logo-icon" />
             <span>Admin Dashboard</span>
           </div>
-
-          <NavLink to="/admin/analytics">
-  <BarChart3 size={20} />
-  <span>Analytics</span>
-</NavLink>
 
           <nav className="admin-nav">
             {menuItems.map((item) => {
