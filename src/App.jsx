@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./features/user/userSlice";
 import Wishlist from "./Wishlist/Wishlist";
+import AIChat from "./components/AIChat";
 
 // Pages
 import Home from "./pages/Home";
@@ -155,6 +156,7 @@ function App() {
           }
         />
       </Routes>
+      <AIChat />
     </Router>
   );
 }
