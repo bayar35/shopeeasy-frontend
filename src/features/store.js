@@ -4,7 +4,7 @@ import productReducer from "./product/productSlice";
 import adminReducer from "./admin/adminSlice";
 import cartReducer from "./cart/cartSlice";
 import wishlistReducer from "./wishlist/wishlistSlice";
-import aiReducer from "./ai/aiSlice";  // ⭐ НЭМЭХ
+import aiReducer from "./ai/aiSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +13,6 @@ export const store = configureStore({
     admin: adminReducer,
     cart: cartReducer,
     wishlist: wishlistReducer,
-    ai: aiReducer,  // ⭐ НЭМЭХ
+    ai: aiReducer,
   },
 });
