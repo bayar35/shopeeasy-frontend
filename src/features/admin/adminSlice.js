@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Fetch All Products
+// ============================================
+// PRODUCTS
+// ============================================
 export const fetchAdminProducts = createAsyncThunk(
   "admin/fetchAdminProducts",
   async (_, { rejectWithValue }) => {
@@ -16,15 +18,12 @@ export const fetchAdminProducts = createAsyncThunk(
   }
 );
 
-// Create Products
 export const createProduct = createAsyncThunk(
   "admin/createProduct",
   async (productData, { rejectWithValue }) => {
     try {
       const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       };
       const { data } = await axios.post(
         "/api/v1/admin/product/create",
@@ -40,15 +39,12 @@ export const createProduct = createAsyncThunk(
   }
 );
 
-// Update Products
 export const updateProduct = createAsyncThunk(
   "admin/updateProduct",
   async ({ id, formData }, { rejectWithValue }) => {
     try {
       const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       };
       const { data } = await axios.put(
         `/api/v1/admin/product/${id}`,
@@ -62,7 +58,6 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
-// Delete Product
 export const deleteProduct = createAsyncThunk(
   "admin/deleteProduct",
   async (productId, { rejectWithValue }) => {
@@ -77,7 +72,9 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
-// Fetch All Users
+// ============================================
+// USERS
+// ============================================
 export const fetchUsers = createAsyncThunk(
   "admin/fetchUsers",
   async (_, { rejectWithValue }) => {
@@ -90,7 +87,6 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-// Get single user
 export const getSingleUser = createAsyncThunk(
   "admin/getSingleUser",
   async (id, { rejectWithValue }) => {
@@ -105,7 +101,6 @@ export const getSingleUser = createAsyncThunk(
   }
 );
 
-// Update User role
 export const updateUserRole = createAsyncThunk(
   "admin/updateUserRole",
   async ({ userId, role }, { rejectWithValue }) => {
@@ -122,7 +117,6 @@ export const updateUserRole = createAsyncThunk(
   }
 );
 
-// Delete User Profile
 export const deleteUser = createAsyncThunk(
   "admin/deleteUser",
   async (userId, { rejectWithValue }) => {
@@ -135,7 +129,9 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
-// ✅ Fetch All Orders (FIXED: /admin/users → /admin/orders)
+// ============================================
+// ORDERS
+// ============================================
 export const fetchAllOrders = createAsyncThunk(
   "admin/fetchAllOrders",
   async (_, { rejectWithValue }) => {
@@ -148,7 +144,21 @@ export const fetchAllOrders = createAsyncThunk(
   }
 );
 
-// Delete Order
+// ⭐ SINGLE ORDER — UpdateOrder.jsx-д зориулж
+export const getOrderDetails = createAsyncThunk(
+  "admin/getOrderDetails",
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`/api/v1/order/${id}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || "Failed to fetch order details"
+      );
+    }
+  }
+);
+
 export const deleteOrder = createAsyncThunk(
   "admin/deleteOrder",
   async (id, { rejectWithValue }) => {
@@ -161,15 +171,12 @@ export const deleteOrder = createAsyncThunk(
   }
 );
 
-// Update Order Status
 export const updateOrderStatus = createAsyncThunk(
   "admin/updateOrderStatus",
   async ({ orderId, status }, { rejectWithValue }) => {
     try {
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       };
       const { data } = await axios.put(
         `/api/v1/admin/order/${orderId}`,
@@ -185,7 +192,9 @@ export const updateOrderStatus = createAsyncThunk(
   }
 );
 
-// Fetch All Reviews
+// ============================================
+// REVIEWS
+// ============================================
 export const fetchProductReviews = createAsyncThunk(
   "admin/fetchProductReviews",
   async (productId, { rejectWithValue }) => {
@@ -202,7 +211,6 @@ export const fetchProductReviews = createAsyncThunk(
   }
 );
 
-// Delete Review
 export const deleteReview = createAsyncThunk(
   "admin/deleteReview",
   async ({ productId, reviewId }, { rejectWithValue }) => {
@@ -219,6 +227,9 @@ export const deleteReview = createAsyncThunk(
   }
 );
 
+// ============================================
+// SLICE
+// ============================================
 const adminSlice = createSlice({
   name: "admin",
   initialState: {
@@ -233,7 +244,7 @@ const adminSlice = createSlice({
     message: null,
     orders: [],
     totalAmount: 0,
-    order: {},
+    order: {},  // ⭐ SINGLE ORDER
     reviews: [],
   },
   reducers: {
@@ -385,6 +396,22 @@ const adminSlice = createSlice({
       .addCase(fetchAllOrders.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || "Failed to fetch orders";
+      });
+
+    // ⭐ SINGLE ORDER
+    builder
+      .addCase(getOrderDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getOrderDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.order = action.payload.order;
+      })
+      .addCase(getOrderDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error =
+          action.payload?.message || "Failed to fetch order details";
       });
 
     builder
