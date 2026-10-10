@@ -11,6 +11,7 @@ import {
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../AdminStyles/AdminLayout.css";
+import { BarChart3 } from "lucide-react";
 
 function AdminLayout({ children }) {
   const location = useLocation();
@@ -40,6 +41,11 @@ function AdminLayout({ children }) {
             <DashboardIcon className="admin-logo-icon" />
             <span>Admin Dashboard</span>
           </div>
+
+          <NavLink to="/admin/analytics">
+  <BarChart3 size={20} />
+  <span>Analytics</span>
+</NavLink>
 
           <nav className="admin-nav">
             {menuItems.map((item) => {

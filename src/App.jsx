@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./features/user/userSlice";
 import Wishlist from "./Wishlist/Wishlist";
 import AIChat from "./components/AIChat";
+import Analytics from "./Admin/Analytics";
 
 // Pages
 import Home from "./pages/Home";
@@ -72,6 +73,7 @@ function App() {
           <Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/reset/:token" element={<ResetPassword />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="analytics" element={<Analytics />} />
 
           {/* ============================================
               WISHLIST

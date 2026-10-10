@@ -1,0 +1,359 @@
+/* ============================================
+   ANALYTICS DASHBOARD
+   ============================================ */
+.analytics-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.analytics-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* ============================================
+   STATS CARDS
+   ============================================ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border-left: 4px solid;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.stat-revenue {
+  border-left-color: #f59e0b;
+}
+
+.stat-orders {
+  border-left-color: #3b82f6;
+}
+
+.stat-products {
+  border-left-color: #8b5cf6;
+}
+
+.stat-users {
+  border-left-color: #10b981;
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: #f9fafb;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.stat-revenue .stat-icon {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.stat-orders .stat-icon {
+  background: #dbeafe;
+  color: #3b82f6;
+}
+
+.stat-products .stat-icon {
+  background: #ede9fe;
+  color: #8b5cf6;
+}
+
+.stat-users .stat-icon {
+  background: #d1fae5;
+  color: #10b981;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+/* ============================================
+   CHARTS
+   ============================================ */
+.charts-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.chart-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.no-data {
+  text-align: center;
+  color: #9ca3af;
+  padding: 40px 20px;
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   TOP PRODUCTS
+   ============================================ */
+.top-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.top-product-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.top-product-item:hover {
+  background: #f3f4f6;
+}
+
+.product-rank {
+  font-weight: 700;
+  color: #f59e0b;
+  font-size: 1.125rem;
+  min-width: 30px;
+}
+
+.product-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info-compact {
+  flex: 1;
+}
+
+.product-name {
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+  font-size: 0.875rem;
+}
+
+.product-sold {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.product-revenue {
+  font-weight: 700;
+  color: #f59e0b;
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   RECENT TABLES
+   ============================================ */
+.recent-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-table thead {
+  background: #f9fafb;
+}
+
+.recent-table th {
+  padding: 12px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.recent-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.order-id {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-processing {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-shipped {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-on-the-way {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+.status-delivered {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.status-cancelled {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ============================================
+   RECENT USERS
+   ============================================ */
+.recent-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info-compact {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.875rem;
+  margin: 0 0 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-email {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.role-badge {
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.role-admin {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.role-user {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-title {
+    font-size: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+}
