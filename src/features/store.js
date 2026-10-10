@@ -19,14 +19,21 @@ export const store = configureStore({
     order: orderReducer,
     analytics: analyticsReducer,
   },
-  // ⭐ Redux DevTools автоматаар идэвхжинэ (development)
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: true,
 });
+
+// ⭐ Debug: Store эхэлсэн эсэхийг шалгах
+console.log("✅ STORE INITIALIZED");
+console.log("✅ STORE KEYS:", Object.keys(store.getState()));
 
 // ⭐ window.__REDUX_STATE__ - Debug-д зориулж
 if (typeof window !== "undefined") {
   window.__REDUX_STATE__ = store.getState();
+  console.log("✅ window.__REDUX_STATE__ SET:", window.__REDUX_STATE__);
+
   store.subscribe(() => {
     window.__REDUX_STATE__ = store.getState();
   });
+} else {
+  console.log("⚠️ window is undefined");
 }
