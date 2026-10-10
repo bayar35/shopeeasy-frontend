@@ -156,8 +156,9 @@ function App() {
           }
         />
       </Routes>
-      <AIChat />
+      
     </Router>
+    <AIChat />
   );
 }
 
