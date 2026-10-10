@@ -56,109 +56,113 @@ function App() {
   }, [dispatch, isAuthenticated]);
 
   return (
-    <Router>
-      <Routes>
-        {/* ============================================
-            PUBLIC ROUTES
-            ============================================ */}
-        <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<Products />} />
-        <Route path="/products/:keyword" element={<Products />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/password/forgot" element={<ForgotPassword />} />
-        <Route path="/reset/:token" element={<ResetPassword />} />
-        <Route path="/cart" element={<Cart />} />
+    <>
+      <Router>
+        <Routes>
+          {/* ============================================
+              PUBLIC ROUTES
+              ============================================ */}
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<Products />} />
+          <Route path="/products/:keyword" element={<Products />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/password/forgot" element={<ForgotPassword />} />
+          <Route path="/reset/:token" element={<ResetPassword />} />
+          <Route path="/cart" element={<Cart />} />
 
-        {/* ============================================
-            WISHLIST — зөвхөн 1 route
-            ============================================ */}
-        <Route
-          path="/wishlist"
-          element={<ProtectedRoute element={<Wishlist />} />}
-        />
+          {/* ============================================
+              WISHLIST
+              ============================================ */}
+          <Route
+            path="/wishlist"
+            element={<ProtectedRoute element={<Wishlist />} />}
+          />
 
-        {/* ============================================
-            USER PROTECTED ROUTES
-            ============================================ */}
-        <Route
-          path="/profile"
-          element={<ProtectedRoute element={<Profile />} />}
-        />
-        <Route
-          path="/profile/update"
-          element={<ProtectedRoute element={<UpdateProfile />} />}
-        />
-        <Route
-          path="/password/update"
-          element={<ProtectedRoute element={<UpdatePassword />} />}
-        />
-        <Route
-          path="/shipping"
-          element={<ProtectedRoute element={<Shipping />} />}
-        />
-        <Route
-          path="/order/confirm"
-          element={<ProtectedRoute element={<OrderConfirm />} />}
-        />
-        <Route
-          path="/process/payment"
-          element={<ProtectedRoute element={<Payment />} />}
-        />
-        <Route
-          path="/paymentSuccess"
-          element={<ProtectedRoute element={<PaymentSuccess />} />}
-        />
-        <Route
-          path="/order/:orderId"
-          element={<ProtectedRoute element={<OrderDetails />} />}
-        />
-        <Route
-          path="/orders/user"
-          element={<ProtectedRoute element={<MyOrders />} />}
-        />
+          {/* ============================================
+              USER PROTECTED ROUTES
+              ============================================ */}
+          <Route
+            path="/profile"
+            element={<ProtectedRoute element={<Profile />} />}
+          />
+          <Route
+            path="/profile/update"
+            element={<ProtectedRoute element={<UpdateProfile />} />}
+          />
+          <Route
+            path="/password/update"
+            element={<ProtectedRoute element={<UpdatePassword />} />}
+          />
+          <Route
+            path="/shipping"
+            element={<ProtectedRoute element={<Shipping />} />}
+          />
+          <Route
+            path="/order/confirm"
+            element={<ProtectedRoute element={<OrderConfirm />} />}
+          />
+          <Route
+            path="/process/payment"
+            element={<ProtectedRoute element={<Payment />} />}
+          />
+          <Route
+            path="/paymentSuccess"
+            element={<ProtectedRoute element={<PaymentSuccess />} />}
+          />
+          <Route
+            path="/order/:orderId"
+            element={<ProtectedRoute element={<OrderDetails />} />}
+          />
+          <Route
+            path="/orders/user"
+            element={<ProtectedRoute element={<MyOrders />} />}
+          />
 
-        {/* ============================================
-            ADMIN ROUTES
-            ============================================ */}
-        <Route
-          path="/admin/*"
-          element={
-            <ProtectedRoute
-              element={
-                <AdminLayout>
-                  <Routes>
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="products" element={<ProductList />} />
-                    <Route
-                      path="product/create"
-                      element={<CreateProduct />}
-                    />
-                    <Route
-                      path="product/:updateId"
-                      element={<UpdateProduct />}
-                    />
-                    <Route path="users" element={<UsersList />} />
-                    <Route path="user/:userId" element={<UpdateRole />} />
-                    <Route path="orders" element={<OrdersList />} />
-                    <Route
-                      path="order/:orderId"
-                      element={<UpdateOrder />}
-                    />
-                    <Route path="reviews" element={<ReviewsList />} />
-                  </Routes>
-                </AdminLayout>
-              }
-              adminOnly={true}
-            />
-          }
-        />
-      </Routes>
-      
-    </Router>
-    <AIChat />
+          {/* ============================================
+              ADMIN ROUTES
+              ============================================ */}
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute
+                element={
+                  <AdminLayout>
+                    <Routes>
+                      <Route path="dashboard" element={<Dashboard />} />
+                      <Route path="products" element={<ProductList />} />
+                      <Route
+                        path="product/create"
+                        element={<CreateProduct />}
+                      />
+                      <Route
+                        path="product/:updateId"
+                        element={<UpdateProduct />}
+                      />
+                      <Route path="users" element={<UsersList />} />
+                      <Route
+                        path="user/:userId"
+                        element={<UpdateRole />}
+                      />
+                      <Route path="orders" element={<OrdersList />} />
+                      <Route
+                        path="order/:orderId"
+                        element={<UpdateOrder />}
+                      />
+                      <Route path="reviews" element={<ReviewsList />} />
+                    </Routes>
+                  </AdminLayout>
+                }
+                adminOnly={true}
+              />
+            }
+          />
+        </Routes>
+      </Router>
+      <AIChat />
+    </>
   );
 }
 
