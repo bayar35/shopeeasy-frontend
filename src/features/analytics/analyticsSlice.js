@@ -8,7 +8,10 @@ export const fetchDashboardStats = createAsyncThunk(
   "analytics/fetchDashboardStats",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("/api/v1/admin/analytics");
+      const { data } = await axios.get(
+  "https://shopeeasy-backend.onrender.com/api/v1/admin/analytics",
+  { withCredentials: true }
+);
       return data;
     } catch (error) {
       return rejectWithValue(
