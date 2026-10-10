@@ -1,19 +1,13 @@
-// frontend/src/api.js
 import axios from "axios";
 
-const API = axios.create({
-  // 🔥 ЭНД ТАНЫ БӨӨНДӨӨ ХАНДАХ БОДИТ БЭКЭНД ХАЯГ ЗААВАЛ БАЙХ ЁСТОЙ:
-  baseURL: "https://shopeeasy-backend.onrender.com", 
-  withCredentials: true, // Күүки болон JWT-ийг интернетээр алдаагүй дамжуулахад заавал хэрэгтэй
-});
-
-export default API;
-
-import axios from "axios";
+// ⭐ Production Backend URL (Vercel дээр ажиллана)
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  "https://shopeeasy-backend.onrender.com/api/v1";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1",
-  withCredentials: true, // Cookie дамжуулахад шаардлагатай
+  baseURL: API_BASE_URL,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
