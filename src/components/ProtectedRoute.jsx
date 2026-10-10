@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function ProtectedRoute({ element, adminOnly = false }) {
@@ -13,8 +13,8 @@ function ProtectedRoute({ element, adminOnly = false }) {
     return <Navigate to="/" replace />;
   }
 
-  // ⭐ Хэрэв `element` байвал түүнийг, байхгүй бол `<Outlet />`
-  return element ? element : <Outlet />;
+  // ⭐ `element`-ийг шууд буцаах
+  return element;
 }
 
 export default ProtectedRoute;
