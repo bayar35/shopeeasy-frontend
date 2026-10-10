@@ -6,7 +6,7 @@ import cartReducer from "./cart/cartSlice";
 import wishlistReducer from "./wishlist/wishlistSlice";
 import aiReducer from "./ai/aiSlice";
 import orderReducer from "./order/orderSlice";
-import analyticsReducer from "./analytics/analyticsSlice";  // ⭐ НЭМЭХ
+import analyticsReducer from "./analytics/analyticsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +17,16 @@ export const store = configureStore({
     wishlist: wishlistReducer,
     ai: aiReducer,
     order: orderReducer,
-    analytics: analyticsReducer,  // ⭐ НЭМЭХ
+    analytics: analyticsReducer,
   },
+  // ⭐ Redux DevTools автоматаар идэвхжинэ (development)
+  devTools: process.env.NODE_ENV !== "production",
 });
+
+// ⭐ window.__REDUX_STATE__ - Debug-д зориулж
+if (typeof window !== "undefined") {
+  window.__REDUX_STATE__ = store.getState();
+  store.subscribe(() => {
+    window.__REDUX_STATE__ = store.getState();
+  });
+}
