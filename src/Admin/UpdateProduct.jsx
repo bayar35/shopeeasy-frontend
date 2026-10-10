@@ -88,6 +88,14 @@ function UpdateProduct() {
     setImagePreview([]);
 
     files.forEach((file) => {
+      if (!file.type.startsWith("image/")) {
+        toast.error("Зөвхөн зураг файл сонгоно уу", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = () => {
         if (reader.readyState === 2) {
@@ -117,9 +125,27 @@ function UpdateProduct() {
     myForm.set("category", category);
     myForm.set("stock", stock);
 
+    // ✅ ШИЙДЭЛ: Base64 зургийг File объект руу хөрвүүлж FormData-д нэмэх
     if (image && image.length > 0) {
-      image.forEach((img) => {
-        myForm.append("image", img);
+      image.forEach((base64Img, index) => {
+        try {
+          const byteString = atob(base64Img.split(",")[1]);
+          const mimeString = base64Img.split(",")[0].split(":")[1].split(";")[0];
+          const ab = new ArrayBuffer(byteString.length);
+          const ia = new Uint8Array(ab);
+          for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+          const blob = new Blob([ab], { type: mimeString });
+          const file = new File([blob], `product_update_${index}.jpg`, {
+            type: mimeString,
+          });
+
+          // Multer-т зориулж 'images' түлхүүрээр append хийнэ
+          myForm.append("images", file);
+        } catch (err) {
+          console.error("Зураг хөрвүүлэхэд алдаа гарлаа:", err);
+        }
       });
     }
 
@@ -129,10 +155,10 @@ function UpdateProduct() {
   return (
     <>
       <PageTitle title="Update Product" />
-            <div className="update-product-container">
+      <div className="update-product-container">
         <div className="update-product-form">
           <h1>Update Product</h1>
-          <form onSubmit={updateProductSubmit}>
+          <form onSubmit={updateProductSubmit} encType="multipart/form-data">
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -241,7 +267,7 @@ function UpdateProduct() {
           </form>
         </div>
       </div>
-          </>
+    </>
   );
 }
 

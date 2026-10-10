@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loadUser } from "./features/user/userSlice";
 import Wishlist from "./Wishlist/Wishlist";
 import AIChat from "./components/AIChat";
@@ -47,14 +47,12 @@ import UpdateOrder from "./Admin/UpdateOrder";
 import ReviewsList from "./Admin/ReviewsList";
 
 function App() {
-  const { isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  // ✅ ШИЙДЭЛ: if нөхцөлийг устгаснаар хуудас сэргэхэд хэрэглэгчийн session тасрахгүй
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(loadUser());
-    }
-  }, [dispatch, isAuthenticated]);
+    dispatch(loadUser());
+  }, [dispatch]);
 
   return (
     <>
@@ -73,7 +71,6 @@ function App() {
           <Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/reset/:token" element={<ResetPassword />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="analytics" element={<Analytics />} />
 
           {/* ============================================
               WISHLIST
@@ -124,43 +121,26 @@ function App() {
           />
 
           {/* ============================================
-              ADMIN ROUTES
+              ADMIN ROUTES (Nested Routes)
               ============================================ */}
           <Route
-            path="/admin/*"
+            path="/admin"
             element={
-              <ProtectedRoute
-                element={
-                  <AdminLayout>
-                    <Routes>
-                      <Route path="dashboard" element={<Dashboard />} />
-                      <Route path="products" element={<ProductList />} />
-                      <Route
-                        path="product/create"
-                        element={<CreateProduct />}
-                      />
-                      <Route
-                        path="product/:updateId"
-                        element={<UpdateProduct />}
-                      />
-                      <Route path="users" element={<UsersList />} />
-                      <Route
-                        path="user/:userId"
-                        element={<UpdateRole />}
-                      />
-                      <Route path="orders" element={<OrdersList />} />
-                      <Route
-                        path="order/:orderId"
-                        element={<UpdateOrder />}
-                      />
-                      <Route path="reviews" element={<ReviewsList />} />
-                    </Routes>
-                  </AdminLayout>
-                }
-                adminOnly={true}
-              />
+              <ProtectedRoute element={<AdminLayout />} adminOnly={true} />
             }
-          />
+          >
+            {/* ✅ ШИЙДЭЛ: Одоо AdminLayout доторх <Outlet />-оор эдгээр хуудсууд зөв солигдож харагдана */}
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="product/create" element={<CreateProduct />} />
+            <Route path="product/:updateId" element={<UpdateProduct />} />
+            <Route path="users" element={<UsersList />} />
+            <Route path="user/:userId" element={<UpdateRole />} />
+            <Route path="orders" element={<OrdersList />} />
+            <Route path="order/:orderId" element={<UpdateOrder />} />
+            <Route path="reviews" element={<ReviewsList />} />
+          </Route>
         </Routes>
       </Router>
       <AIChat />
