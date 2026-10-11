@@ -21,4 +21,3 @@ export const store = configureStore({
   },
   devTools: true,
 });
-// ❌ Доор нь байсан console.log болон window.__REDUX_STATE__ гэсэн кодуудыг бүгдийг нь устгаад хадгална уу.
