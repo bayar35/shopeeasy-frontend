@@ -8,7 +8,7 @@ import aiReducer from "./ai/aiSlice";
 import orderReducer from "./order/orderSlice";
 import analyticsReducer from "./analytics/analyticsSlice";
 
-console.log("⚡ STORE: Слайсуудыг уншиж эхэллээ...");
+console.log("👉 [3/4] STORE.JS: Санах ойн слайсуудыг ачаалж эхэллээ...");
 
 export const store = configureStore({
   reducer: {
@@ -24,9 +24,8 @@ export const store = configureStore({
   devTools: true,
 });
 
-// ✅ Аюулгүй консол шалгалт
 try {
-  console.log("✅ STORE: Амжилттай угсрагдлаа. Санах ойн түлхүүрүүд:", Object.keys(store.getState()));
-} catch (storeError) {
-  console.error("💥 STORE АЖИЛЛАХАД АЛДАА ГАРЛАА:", storeError);
+  console.log("✅ STORE.JS: Санах ой амжилттай бэлэн боллоо. Keys:", Object.keys(store.getState()));
+} catch (err) {
+  console.error("💥 STORE.JS РЕДЮСЕРҮҮДИЙГ УНШИХАД АЛДАА ГАРЛАА:", err);
 }
