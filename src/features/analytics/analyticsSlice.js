@@ -65,23 +65,29 @@ const analyticsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchDashboardStats.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-        state.stats = action.payload.stats || initialState.stats;
-        state.orderStatus = action.payload.orderStatus || initialState.orderStatus;
-        state.salesLast7Days = action.payload.salesLast7Days || [];
-        state.salesLast30Days = action.payload.salesLast30Days || [];
-        state.topProducts = action.payload.topProducts || [];
-        state.categorySales = action.payload.categorySales || [];
-        state.recentOrders = action.payload.recentOrders || [];
-        state.recentUsers = action.payload.recentUsers || [];
-      })
-      .addCase(fetchDashboardStats.rejected, (state, action) => {
-        state.loading = false;
-        state.error =
-          action.payload?.message || "Failed to fetch analytics";
-      });
+      // analyticsSlice.js файлын доод хэсгийг ингэж засна:
+.addCase(fetchDashboardStats.fulfilled, (state, action) => {
+  state.loading = false;
+  
+  // ✅ Backend-ээс ирж буй датаны түлхүүр үгсийг шууд болон объект хэлбэрээр аль алинаар нь хамгаалж оноов
+  state.stats = {
+    totalRevenue: action.payload.totalRevenue || action.payload.stats?.totalRevenue || 0,
+    totalOrders: action.payload.totalOrders || action.payload.stats?.totalOrders || 0,
+    totalProducts: action.payload.totalProducts || action.payload.stats?.totalProducts || 0,
+    totalUsers: action.payload.totalUsers || action.payload.stats?.totalUsers || 0,
+  };
+
+  state.orderStatus = action.payload.orderStatus || {
+    processing: action.payload.processingOrders || 0,
+    shipped: action.payload.shippedOrders || 0,
+    delivered: action.payload.deliveredOrders || 0,
+    cancelled: action.payload.cancelledOrders || 0,
+  };
+
+  state.salesLast7Days = action.payload.salesLast7Days || [];
+  state.categorySales = action.payload.categorySales || [];
+})
+
   },
 });
 
